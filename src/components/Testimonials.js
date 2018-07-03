@@ -1,9 +1,11 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { v4 } from 'uuid'
 
-export default ({ testimonials }) => (
+const Testimonials = ({ testimonials }) => (
   <div>
     {testimonials.map(testimonial => (
-      <article className="message">
+      <article key={v4()} className="message">
         <div className="message-body">
           {testimonial.quote}
           <br />
@@ -12,4 +14,15 @@ export default ({ testimonials }) => (
       </article>
     ))}
   </div>
-);
+)
+
+Testimonials.propTypes = {
+  testimonials: PropTypes.arrayOf(
+    PropTypes.shape({
+      quote: PropTypes.string,
+      author: PropTypes.string,
+    })
+  ),
+}
+
+export default Testimonials
